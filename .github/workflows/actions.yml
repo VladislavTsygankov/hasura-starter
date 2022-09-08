@@ -8,7 +8,7 @@ jobs:
       - name: Docker Compose Action
         uses: isbang/compose-action@v1.2.0
         with:
-          compose-file: ./docker-compose.yml
+          compose-file: ././docker-compose.yml
           up-flags: "-d"
       - name: Check containers
         run: docker ps
