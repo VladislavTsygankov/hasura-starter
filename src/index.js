@@ -43,8 +43,6 @@ app.post('/applyUsersToGroup', async (req, res) => {
         }
     );
 
-    console.log(returning)
-
     const formattedResponse = returning.reduce((acc, it) => ({
         ...acc,
         id: it.group.id,
