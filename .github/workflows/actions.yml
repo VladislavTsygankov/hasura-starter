@@ -5,7 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build the stack
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - run: npm install
+      - name: Up the stack
         run: docker-compose up -d
-      - name: Get conainers list
+      - name: Get containers list
         run: docker ps
