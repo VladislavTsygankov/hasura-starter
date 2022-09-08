@@ -1,0 +1,11 @@
+name: hasura-starter
+on: [push]
+jobs: 
+  explore-containers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the stack
+        run: docker-compose up -d
+      - name: Get conainers list
+        run: docker ps
