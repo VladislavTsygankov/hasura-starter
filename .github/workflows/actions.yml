@@ -1,14 +1,31 @@
 name: hasura-starter
-on: [push]
+on:
+  push: 
+    branches: 
+    - master
+  pull_request: 
+    branches:
+    - master
 jobs: 
   explore-containers:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Docker Compose Action
-        uses: isbang/compose-action@v1.2.0
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install node
+        uses: actions/setup-node@v1
         with:
-          compose-file: ././docker-compose.yml
-          up-flags: "-d"
+          node-version: 14.x
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start containers
+        run: docker-compose up -d
+
       - name: Check containers
         run: docker ps
+
+      - name: Stop containers
+        if: always()
+        run: docker-compose down
