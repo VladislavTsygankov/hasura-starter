@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   postgres:
-    image: sorandom/hasura-postgres:latest
+    image: sorandom/hasura-postgres
     restart: always
     logging:
           options:
@@ -18,7 +18,7 @@ services:
     restart: always
 
   node_server:
-    image: sorandom/hasura-node:latest
+    image: sorandom/hasura-node
     ports:
       - 3000:3000
     volumes:
