@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   postgres:
-    image: postgres:12
+    image: sorandom/hasura-postgres:latest
     restart: always
     logging:
           options:
@@ -9,37 +9,20 @@ services:
             max-file: "3"
     volumes:
       - pg_data:/var/lib/postgresql/data
-      - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
-    environment:
-      POSTGRES_PASSWORD: postgrespassword
   graphql-engine:
-    image: hasura/graphql-engine:v2.11.1.cli-migrations-v3
+    image: sorandom/hasura-starter
     ports:
       - "8080:8080"
     depends_on:
       - postgres
     restart: always
-    environment:
-      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
-      PG_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
-      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
-      HASURA_GRAPHQL_DEV_MODE: "true"
-      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
-      HASURA_GRAPHQL_MIGRATIONS_SERVER_TIMEOUT: 10
-    volumes:
-      - ./metadata:/hasura-metadata
 
   node_server:
-    container_name: node_server
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    command: ["npm", "run", "prod"]
+    image: sorandom/hasura-node:latest
     ports:
       - 3000:3000
     volumes:
       - ./:/hasura-starter
 
 volumes:
-  db_data:
   pg_data:

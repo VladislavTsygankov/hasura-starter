@@ -1,10 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const fetch = require("node-fetch");
 const {GraphQLClient, gql} = require("graphql-request");
 
 const app = express();
 const client = new GraphQLClient("http://host.docker.internal:8080/v1/graphql", {});
+const PORT = process.env.PORT || 3000;
 
 
 app.use(bodyParser.json());
@@ -63,8 +63,8 @@ app.post('/applyUsersToGroup', async (req, res) => {
 
 const start = async () => {
   try {
-    await app.listen(3000);
-    console.log(`Started on ${3000} port`)
+    await app.listen(PORT);
+    console.log(`Started on ${PORT} port`)
   } catch(err) {
     console.log(err);
   }
