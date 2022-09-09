@@ -1,0 +1,143 @@
+- name: allowed-queries
+  definition:
+    queries:
+      - name: get_users
+        query: |
+          query GetUsers {
+            users {
+              id
+              lastname
+              firstname
+            }
+          }
+      - name: get_groups
+        query: |
+          query get_groups {
+            groups {
+              id
+              name
+            }
+          }
+      - name: get_users_groups
+        query: |
+          query get_users_groups {
+            users {
+              id
+              firstname
+              lastname
+              groups {
+                id
+                name
+              }
+            }
+          }
+      - name: get_user_by_id
+        query: |
+          query get_user_by_id ($user_id: Int!) {
+            users(where: {id:{_eq:$user_id}}) {
+              id
+              firstname
+              lastname
+              groups {
+                id
+                name
+              }
+            }
+          }
+      - name: get_users_by_group
+        query: |
+          query get_users_by_group ($group_id: Int!) {
+            users(where: {groups:{id:{_eq:$group_id}}}) {
+              id
+              firstname
+              lastname
+            }
+          }
+      - name: get_group_by_id
+        query: |
+          query get_group_by_id ($group_id: Int!) {
+            groups(where: {id:{_eq:$group_id}}) {
+              id
+              name
+              users {
+                firstname
+                lastname
+              }
+            }
+          }
+      - name: create_user
+        query: |
+          mutation create_user ($user: users_insert_input!) {
+            insert_users_one(object: $user) {
+              id
+              firstname
+              lastname
+            }
+          }
+      - name: create_group
+        query: |
+          mutation create_group ($group: groups_insert_input!) {
+            insert_groups_one(object: $group) {
+              id
+              name
+              users {
+                firstname
+                lastname
+              }
+            }
+          }
+      - name: update_user
+        query: |
+          mutation update_user ($userId: Int!, $user: users_set_input!) {
+            update_users_by_pk(pk_columns: {id:$userId}, _set: $user) {
+              id
+              firstname
+              lastname
+            }
+          }
+      - name: delete_user
+        query: |
+          mutation delete_user ($userId: Int!) {
+            delete_users_by_pk(id: $userId) {
+              id
+            }
+          }
+      - name: update_group
+        query: |
+          mutation update_group ($groupId: Int!, $group: groups_set_input!) {
+            update_groups_by_pk(pk_columns: {id:$groupId}, _set: $group) {
+              id
+              name
+              users {
+                firstname
+                lastname
+              }
+            }
+          }
+      - name: create_relationships
+        query: |
+          mutation create_relationship ($relahionships: [user_group_insert_input!]!) {
+            insert_user_group(objects: $relahionships) {
+              returning {
+                user {
+                  lastname
+                  firstname
+                }
+                group {
+                  name
+                }
+              }
+            }
+          }
+      - name: apply_users__to_group
+        query: |
+          mutation apply_users_group ($groupId: Int!, $userIds: [Int!]!) {
+            applyUsersToGroup(groupId: $groupId, userIds: $userIds) {
+              id
+              name
+              users {
+                firstname
+                lastname
+              }
+            }
+          }

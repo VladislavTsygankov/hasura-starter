@@ -1,0 +1,117 @@
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: apply_users__to_group
+  methods:
+    - POST
+  name: apply_users__to_group
+  url: apply_users
+- comment: getting groups
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: get_groups
+  methods:
+    - GET
+  name: get_groups
+  url: groups
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: create_group
+  methods:
+    - POST
+  name: create_group
+  url: groups
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: update_group
+  methods:
+    - PUT
+  name: update_group
+  url: groups/:groupId
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: get_group_by_id
+  methods:
+    - GET
+  name: get_group_by_id
+  url: groups/:group_id
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: create_relationships
+  methods:
+    - POST
+  name: create_relationships
+  url: user-group
+- comment: gets list of users
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: get_users
+  methods:
+    - GET
+  name: get_users
+  url: users
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: create_user
+  methods:
+    - POST
+  name: create_user
+  url: users
+- comment: Updating user
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: update_user
+  methods:
+    - PUT
+  name: update_user
+  url: users/:userId
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: delete_user
+  methods:
+    - DELETE
+  name: delete_user
+  url: users/:userId
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: get_user_by_id
+  methods:
+    - GET
+  name: get_user_by_id
+  url: users/:user_id
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: get_users_by_group
+  methods:
+    - GET
+  name: get_users_by_group
+  url: users_by_group/:group_id
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: get_users_groups
+  methods:
+    - GET
+  name: get_users_groups
+  url: users_groups

@@ -1,0 +1,14 @@
+actions:
+  - name: applyUsersToGroup
+    definition:
+      kind: synchronous
+      handler: http://host.docker.internal:3000/applyUsersToGroup
+custom_types:
+  enums: []
+  input_objects: []
+  objects:
+    - name: InputGroup
+    - name: ApplyUsersResponse
+    - name: GetGroupsOutput
+    - name: User
+  scalars: []

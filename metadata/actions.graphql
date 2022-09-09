@@ -1,0 +1,28 @@
+type Mutation {
+  applyUsersToGroup(
+    groupId: Int!
+    userIds: [Int]!
+  ): ApplyUsersResponse
+}
+
+type InputGroup {
+  name: String!
+  userIds: [Int]
+}
+
+type ApplyUsersResponse {
+  id: Int!
+  name: String!
+  users: [User]!
+}
+
+type GetGroupsOutput {
+  id: Int!
+  name: String!
+}
+
+type User {
+  firstname: String!
+  lastname: String!
+}
+
