@@ -39,4 +39,4 @@ jobs:
             file: ./docker/node_server/Dockerfile
             push: true
             tags: "1.0.0"
-            labels: 1.0.0""
+            labels: "1.0.0""
