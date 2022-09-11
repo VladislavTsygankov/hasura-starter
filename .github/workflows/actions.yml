@@ -6,26 +6,37 @@ on:
   pull_request: 
     branches:
     - master
+env: 
+  REGISTRY: sorandom
+  NODE_IMAGE: hasura-node
+  HASURA_IMAGE: hasura-starter
+  POSTGRES_IMAGE: hasura-postgres
 jobs: 
   explore-containers:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Install node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-      - name: Install dependencies
-        run: npm install
-
-      - name: Start containers
-        run: docker-compose up -d
-
-      - name: Check containers
-        run: docker ps
-
-      - name: Stop containers
-        if: always()
-        run: docker-compose down
+      name: Push Docker image to Docker Hub
+      runs-on: ubuntu-latest
+      steps:
+        - name: Check out the repo
+          uses: actions/checkout@v3
+        
+        - name: Log in to Docker Hub
+          uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+          with:
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
+        - name: Extract metadata (tags, labels) for Docker
+          id: meta
+          uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+          with:
+            images: ${{ REGISTRY }}/${{ NODE_IMAGE }}
+        
+        - name: Build and push Docker image
+          uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+          with:
+            context: .
+            file: ./docker/node_server/Dockerfile
+            push: true
+            tags: "1.0.0"
+            labels: 1.0.0""
