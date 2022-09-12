@@ -11,6 +11,8 @@ services:
       - pg_data:/var/lib/postgresql/data
   graphql-engine:
     image: sorandom/hasura-starter
+    environment:
+      ENV HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
     ports:
       - "8080:8080"
     depends_on:
