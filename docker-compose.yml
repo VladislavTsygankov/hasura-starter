@@ -12,7 +12,13 @@ services:
   graphql-engine:
     image: sorandom/hasura-service:latest
     environment:
-      ENV HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+      PG_DATABASE_URL:  postgres://postgres:postgrespassword@postgres:5432/postgres
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_MIGRATIONS_SERVER_TIMEOUT: 10
+      HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
     ports:
       - "8080:8080"
     depends_on:
