@@ -38,7 +38,7 @@ jobs:
             context: .
             file: ./docker/hasura/Dockerfile
             push: true
-            tags: sorandom/hasura-starter:latest
+            tags: sorandom/hasura-service:latest
         
         - name: Build and push postgres DB image
           uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc

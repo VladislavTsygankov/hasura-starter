@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   postgres:
-    image: sorandom/hasura-postgres
+    image: sorandom/hasura-postgres:latest
     restart: always
     logging:
           options:
@@ -10,7 +10,7 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
   graphql-engine:
-    image: sorandom/hasura-starter
+    image: sorandom/hasura-service:latest
     environment:
       ENV HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
     ports:
@@ -20,7 +20,7 @@ services:
     restart: always
 
   node_server:
-    image: sorandom/hasura-node
+    image: sorandom/hasura-node:latest
     ports:
       - 3000:3000
     volumes:
